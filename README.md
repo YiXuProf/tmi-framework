@@ -1,8 +1,7 @@
 # IMERG precipitation correction (Hunan)
 
 This repository contains the code accompanying the paper:
-_"Mechanism purity, not algorithmic complexity, governs machine learning
-correction of satellite precipitation: The TMI framework"_ (under review).
+_"Mechanism purity, not algorithmic complexity, governs machine learning correction of satellite precipitation: The TMI framework and a case study in Hunan Province, China"_ (under review).
 
 Train **random forest (RF)** and **linear regression (LR)** models to bias-correct GPM IMERG daily precipitation against a gridded gauge analysis (**CN05.1**), with **ERA5** (u10, v10, tcwv) and **DEM** as extra predictors. The workflow interpolates all fields to a common 0.25° grid over Hunan Province (China), fits on summer months (JJA) for selected years, evaluates on held-out years, and exports **figures**, **CSV metrics**, and an optional **Excel** summary.
 
