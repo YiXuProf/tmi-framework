@@ -2,7 +2,8 @@
 
 This repository contains the code accompanying the paper:
 _"Mechanism purity, not algorithmic complexity, governs machine learning
-correction of satellite precipitation: The TMI framework and a case study in Hunan Province, China"_ (under review).
+correction of satellite precipitation: The Terrain–Moisture–Intensity (TMI)
+framework and a case study in Hunan Province, China"_ (under review).
 
 Train **random forest (RF)** and **linear regression (LR)** models to bias-correct GPM IMERG daily precipitation against a gridded gauge analysis (**CN05.1**), with **ERA5** (u10, v10, tcwv) and **DEM** as extra predictors. The workflow interpolates all fields to a common 0.25° grid over Hunan Province (China), fits on summer months (JJA) for selected years, evaluates on held-out years, and exports **figures**, **CSV metrics**, and an optional **Excel** summary.
 
@@ -153,8 +154,8 @@ This project is licensed under the MIT License – see the [LICENSE](LICENSE) fi
 If you use this code in published work, please cite the accompanying paper:
 
 > Yi Xu. _Mechanism purity, not algorithmic complexity, governs machine
-> learning correction of satellite precipitation: The TMI framework and a
-> case study in Hunan Province, China._
+> learning correction of satellite precipitation: The Terrain–Moisture–Intensity
+> (TMI) framework and a case study in Hunan Province, China._
 > (under review)
 
 Additionally, remember to cite the IMERG, CN05.1, and ERA5 products you used.
