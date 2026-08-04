@@ -1,0 +1,6 @@
+Feature,RF-Summer->Spring,RF-Summer->Spring direction,RF-Summer->Summer,RF-Summer->Summer direction,RF-Spring->Spring,RF-Spring->Spring direction,SummerModel Cross-Season Consistency,SpringDomain Consistency,All Three Same Direction
+imerg,0.937,+,0.951,+,0.942,+,Yes,Yes,Yes
+tcwv,0.812,+,0.897,+,0.823,+,Yes,Yes,Yes
+dem,0.523,+,0.7,+,0.534,+,Yes,Yes,Yes
+v10,-0.412,-,-0.744,-,-0.423,-,Yes,Yes,Yes
+u10,-0.156,-,0.096,+,-0.148,-,No,Yes,No

@@ -1,0 +1,2 @@
+Subregion_A,Subregion_B,N_A,N_B,R2_A,R2_B,R2_gap_A_minus_B,Bootstrap_N,CI95_low,CI95_high,Bootstrap_p_two_sided(H0:gap=0),Significant_at_0.05,reported_gap_reference,reference_r2_central,reference_r2_south,reference_gap_within_ci95,abs_diff_point_vs_reference
+Central Hunan,South Hunan,9200,16192,0.13257329006549545,0.45253710221571997,-0.3199638121502245,1000,-0.4041820135848785,-0.23741253883231536,0.0,True,-0.3199638121502245,0.1325732900654954,0.4525371022157199,True,0.0
