@@ -54,11 +54,17 @@ def _stage_figures(repo_root: Path) -> list[Path]:
     return [_script_path(repo_root, "src/figures/stage_figures.py")]
 
 
+def _stage_xreg(repo_root: Path) -> list[Path]:
+    # Cross-regional validation + Fig.7 / Fig.8 / Fig.S2
+    return [_script_path(repo_root, "src/pipelines/xreg_validation.py")]
+
+
 def _build_stage_map(repo_root: Path):
     return {
         "train": _stage_train(repo_root),
         "analysis": _stage_analysis(repo_root),
         "figures": _stage_figures(repo_root),
+        "xreg": _stage_xreg(repo_root),
     }
 
 
@@ -67,7 +73,7 @@ def _check_stage_dependencies(stage: str, config_module) -> None:
         Path(config_module.DATA_NPZ_PATH),
         Path(config_module.RF_SUMMER_MODEL_PATH),
     ]
-    if stage in {"analysis", "figures"}:
+    if stage in {"analysis", "figures", "xreg"}:
         _require_files(core_required, stage)
     if stage == "analysis":
         spring_required = [
@@ -75,21 +81,31 @@ def _check_stage_dependencies(stage: str, config_module) -> None:
             Path(config_module.RF_SPRING_MODEL_PATH),
         ]
         _require_files(spring_required, stage)
+    if stage == "xreg":
+        xreg_required = [
+            Path(config_module.LR_MODEL_PATH),
+            Path(config_module.OBS_NC),
+            Path(config_module.DEM_REF_NC),
+        ]
+        _require_files(xreg_required, stage)
 
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Dependency-aware runner for this repo. "
-            "Default order: train -> analysis -> figures."
+            "Default order: train -> analysis -> figures -> xreg."
         )
     )
     parser.add_argument(
         "--steps",
         nargs="+",
-        choices=["train", "analysis", "figures"],
-        default=["train", "analysis", "figures"],
-        help="Pipeline stages to run in the given order.",
+        choices=["train", "analysis", "figures", "xreg"],
+        default=["train", "analysis", "figures", "xreg"],
+        help=(
+            "Pipeline stages to run in the given order. "
+            "'xreg' = cross-regional validation (Fig.7/Fig.8/Fig.S2)."
+        ),
     )
     parser.add_argument(
         "--dry-run",
