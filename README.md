@@ -1,161 +1,165 @@
-# IMERG precipitation correction (Hunan)
+# IMERG precipitation correction with the TMI framework
 
-This repository contains the code accompanying the paper:
-_"Mechanism purity, not algorithmic complexity, governs machine learning
-correction of satellite precipitation: The Terrain–Moisture–Intensity (TMI)
-framework and a case study in Hunan Province, China"_ (under review).
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21757101.svg)](https://doi.org/10.5281/zenodo.21757101)
 
-Train **random forest (RF)** and **linear regression (LR)** models to bias-correct GPM IMERG daily precipitation against a gridded gauge analysis (**CN05.1**), with **ERA5** (u10, v10, tcwv) and **DEM** as extra predictors. The workflow interpolates all fields to a common 0.25° grid over Hunan Province (China), fits on summer months (JJA) for selected years, evaluates on held-out years, and exports **figures**, **CSV metrics**, and an optional **Excel** summary.
+Code accompanying the paper:
+
+> Yi Xu. _Machine learning correction of satellite precipitation is governed
+> by mechanism purity, not algorithmic complexity: a proof-of-concept study
+> in Hunan, China, with pre-registered cross-regional validation._
+> (under review)
+
+Random forest (RF) and linear regression (LR) bias correction of GPM IMERG daily precipitation against the CN05.1 gridded gauge analysis, with ERA5 (u10, v10, tcwv) and SRTM DEM as additional predictors. All fields are remapped to a common 0.25° grid; models are trained on JJA 2016–2020 and evaluated on JJA 2021–2022. The repository also contains the **pre-registered cross-regional validation** over Guangxi and Guangdong (manuscript Sections 2.3.5 and 3.6).
 
 ## Pipeline
 
-1. **`train`** — Load NetCDF inputs, align grids/times, build train/test samples, fit RF & LR, save `joblib` models + `npz` predictions + NetCDF slices for downstream use.
-2. **`analysis`** — Run ablation, SHAP-based diagnostics, seasonal transfer analysis, and bootstrap statistics; writes CSV/MD analysis artifacts.
-3. **`figures`** — Generate manuscript figures (PNG/SVG) from model outputs and analysis-ready artifacts.
+Four dependency-aware stages (each maps to the code location in parentheses):
 
-Entry point:
-
-```bash
-python main.py
-```
-
-Optional: run specific stages only:
+1. **`train`** (`src/pipelines/stage_train.py` → `pipeline_train_model.py`) — load NetCDF inputs, align grids/times, fit summer & spring RF/LR models, export `joblib` models, `npz` samples, and NetCDF slices under `models/`.
+2. **`analysis`** (`src/analysis/`) — ablation (Table 1), intensity-stratified SHAP (Table 2), subregional performance + bootstrap CIs (Table 3), seasonal transfer (Table 4), seasonal SHAP direction (Table 5), K-means clustering (Tables S1–S2), SHAP disorder bootstrap (Table S4), and Moran's I (Table S5).
+3. **`figures`** (`src/figures/`) — manuscript Figs. 1–6 and Fig. S1 (SVG).
+4. **`xreg`** (`src/pipelines/xreg_validation.py`; shared Moran's I in `src/core/morans_proxies.py`) — cross-regional two-arm validation: a priori proxies → **pre-registered predictions** → LORO transfer/retraining evaluation → Tables S6–S8, Figs. 7–8, Fig. S2.
 
 ```bash
-python main.py --steps train
-python main.py --steps analysis
-python main.py --steps figures
-python main.py --steps train analysis figures
+python main.py                                   # all four stages, in order
+python main.py --steps train analysis            # selected stages
+python main.py --dry-run                         # show execution plan only
+python main.py --stop-on-error                   # halt at first failure
 ```
 
-Run stages separately if needed (from the repo root, with `src` on `PYTHONPATH`):
+Stages can also be run individually (repo root, `src` on `PYTHONPATH`):
 
 ```bash
 python -c "import sys; sys.path.insert(0,'src'); from pipelines.stage_train import main; main()"
 python -c "import sys; sys.path.insert(0,'src'); from analysis.stage_analysis import main; main()"
 python -c "import sys; sys.path.insert(0,'src'); from figures.stage_figures import main; main()"
+python src/pipelines/xreg_validation.py
 ```
 
 ## Project structure
 
 ```text
 .
-├─ assets/                  # Boundary files and optional fonts
-├─ models/                  # Generated locally; not tracked in git
-├─ results/                 # Generated locally; not tracked in git
+├─ main.py                      # Dependency-aware entrypoint (train → analysis → figures → xreg)
+├─ requirements.txt             # Pinned environment (scikit-learn 1.7.2)
+├─ assets/                      # Province boundaries: hunan / guangxi / guangdong .geojson
 ├─ src/
 │  ├─ core/
-│  │  ├─ project_config.py          # Runtime configuration
-│  │  ├─ plot_palette.py            # Shared plot color aliases
-│  │  └─ shap_cache.py              # Shared SHAP cache utility
+│  │  ├─ project_config.py      # Paths, years, RF and grid constants
+│  │  ├─ morans_proxies.py      # Single Moran's I definition (Table S5 / xreg)
+│  │  ├─ shap_cache.py          # Shared SHAP cache utility
+│  │  └─ plot_palette.py        # Shared figure palette
 │  ├─ pipelines/
-│  │  ├─ pipeline_train_model.py    # Core training pipeline
-│  │  └─ stage_train.py             # Train stage entrypoint
-│  ├─ analysis/
-│  │  ├─ stage_analysis.py          # Analysis stage entrypoint
-│  │  └─ *.py                       # Analysis scripts (CSV/MD outputs)
-│  └─ figures/
-│     ├─ stage_figures.py           # Figures stage entrypoint
-│     └─ figure_*.py                # Figure scripts (PNG/SVG outputs)
-└─ main.py                  # Repository-level entrypoint
+│  │  ├─ pipeline_train_model.py# Core training pipeline
+│  │  ├─ stage_train.py         # train stage entrypoint
+│  │  └─ xreg_validation.py     # xreg: proxies → pre-registration → LORO eval → Figs. 7/8/S2
+│  ├─ analysis/                 # 9 analysis scripts + stage_analysis.py (see Pipeline)
+│  └─ figures/                  # figure_*.py (Figs. 1–6, S1) + stage_figures.py
+├─ models/                      # NOT tracked: trained joblib models + intermediates (see Outputs)
+└─ results/                     # TRACKED: curated artifacts reported in the paper
+   ├─ tables/                   # Tables 1–5 and S1–S4 (CSV)
+   ├─ figures/                  # Figs. 1–6 and S1 (SVG)
+   ├─ data/                     # Underlying CSVs (daily bias, seasonal transfer, K4 assignments)
+   └─ xreg/                     # Cross-regional artifacts incl. the pre-registration record
 ```
+
+## Where each manuscript item lives
+
+| Manuscript item | Repository file(s) |
+| --------------- | ------------------ |
+| Table 1 (ablation) | `results/tables/Table1_ablation_results.csv` |
+| Table 2 (SHAP by intensity) | `results/tables/Table2_shap_direction_by_intensity.csv` |
+| Table 3 (subregions + CI) | `results/tables/Table3_subregional_performance.csv`, `Table3_bootstrap_ci.csv` |
+| Table 4 (interannual/transfer) | `results/tables/Table4_interannual_performance_2021_2022.csv` |
+| Table 5 (seasonal SHAP) | `results/tables/Table5_seasonal_shap_direction.csv` |
+| Tables S1–S2 (K-means) | `results/tables/TableS1_*.csv`, `TableS2_*.csv`; raw labels in `results/data/TableS2_raw_kmeans_K4_assignments.csv` |
+| Table S3 (t-SNE) | `results/tables/TableS3_tsne_sensitivity.csv` |
+| Table S4 (disorder) | `results/tables/TableS4_shap_disorder_bootstrap.csv` |
+| Table S5 (Hunan coherence) | Hunan rows of `results/xreg/proxies.csv` and `table_subregion_summary.csv`; generator `src/analysis/table_s5_morans_i.py` |
+| Table S6 (transfer matrix) | `results/xreg/table_loro_matrix.csv`, `table_loro_deltaR2.csv`, `eval_matrix.csv` |
+| Table S7 (prediction check) | `results/xreg/prediction_check.csv` |
+| Table S8 (pre-registration) | `results/xreg/predictions_registered.csv` (+ `run_log.txt`) |
+| Figs. 1–6, S1 | `results/figures/*.svg` |
+| Figs. 7–8, S2 | `results/xreg/*.svg` |
 
 ## Requirements
 
 - **Python** 3.10+ (developed and tested with **Python 3.10.19** on Linux)
-- Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-See `requirements.txt` for pinned versions (numpy, pandas, xarray, scikit-learn, matplotlib, netCDF4, joblib, scipy, shap, geopandas, openpyxl, SciencePlots).
-
 > **Note:** Random Forest results are sensitive to the scikit-learn
-> version (pinned: 1.7.2). Other versions may produce slightly
-> different numbers.
+> version (pinned: **1.7.2**). Other versions may produce slightly
+> different numbers. Reproducibility constants: `RANDOM_STATE = 42`,
+> `N_ESTIMATORS = 500`, `MAX_SAMPLES_PER_TIME = 2000`
+> (`src/core/project_config.py`).
 
 ## Input data
 
-Set the data directory with the environment variable **`DATA_ROOT`** (default in `src/core/project_config.py` is `/mnt/data/imerg_correction_hunan`). Under `DATA_ROOT`, the pipeline expects:
+Raw inputs are **not redistributed** with this repository (product licenses). Download from the original sources and place them under **`DATA_ROOT`** (environment variable; default `/mnt/data/imerg_correction_hunan` in `src/core/project_config.py`):
 
-| File               | Role                                                               |
-| ------------------ | ------------------------------------------------------------------ |
-| `imerg.nc`         | IMERG precipitation (time × lat × lon)                             |
-| `cn051.nc`         | CN05.1 (or other) gridded daily precipitation for training targets |
-| `era5.nc`          | ERA5: u10, v10, tcwv (and consistent `time`)                       |
-| `dem_hunan_025.nc` | Static DEM on or near the target grid                              |
+| Dataset | Source |
+| ------- | ------ |
+| GPM IMERG Final Run daily precipitation (V07) | NASA GES DISC — https://doi.org/10.5067/GPM/IMERGDF/DAY/07 |
+| ERA5 hourly reanalysis, single levels (u10, v10, tcwv) | Copernicus Climate Data Store — https://doi.org/10.24381/cds.adbb2d47 |
+| CN05.1 gridded daily precipitation | Nansen-Zhu International Research Centre, IAP, Chinese Academy of Sciences (on request) |
+| SRTM 30 m DEM | Big Earth Data Science Data Center (CASEarth) — https://doi.org/10.12237/casearth.67ad563083917d6a7fa53543 |
 
-Variable names are resolved via candidate lists in `src/core/project_config.py` (`*_VAR_CANDIDATES`). Datasets are renamed to `lat` / `lon` / `time` where needed and interpolated to the target extent:
+Expected layout:
 
-- Longitude **108.65–114.35°E**, latitude **24.50–30.30°N**, resolution **0.25°** (WGS84).
+| Path under `DATA_ROOT` | Role |
+| ---------------------- | ---- |
+| `hunan/imerg_hunan.nc` | IMERG precipitation (Hunan) |
+| `cn051.nc` | CN05.1 daily precipitation (target, shared by all provinces) |
+| `hunan/era5_hunan.nc` | ERA5 u10 / v10 / tcwv (Hunan) |
+| `hunan/dem_hunan_025.nc` | DEM pre-aggregated to ~0.25° (Hunan) |
+| `guangxi/imerg_guangxi.nc4` (or `.nc`), `guangxi/era5_guangxi.nc`, `guangxi/dem_guangxi_025.nc` | Guangxi inputs (`xreg` only) |
+| `guangdong/imerg_guangdong.nc4` (or `.nc`), `guangdong/era5_guangdong.nc`, `guangdong/dem_guangdong_025.nc` | Guangdong inputs (`xreg` only) |
 
-Training and test years, and seasonal months, are configured in `project_config.py` (`TRAIN_YEARS`, `TEST_YEARS`, `SUMMER_MONTHS`, `SPRING_MONTHS`).
+Variable names are resolved via candidate lists in `project_config.py` (`*_VAR_CANDIDATES`); fields are renamed to `lat` / `lon` / `time` and interpolated to the Hunan target grid (108.65–114.35°E, 24.50–30.30°N, 0.25°, WGS84) or the corresponding provincial grid. Train/test years and seasons: `TRAIN_YEARS = 2016–2020`, `TEST_YEARS = 2021–2022`, `SUMMER_MONTHS = [6, 7, 8]`, `SPRING_MONTHS = [3, 4, 5]`.
 
-## Configuration
+## Pre-registration record (xreg)
 
-Edit **`src/core/project_config.py`** for:
+`results/xreg/predictions_registered.csv` is the archived pre-registration record for the cross-regional test:
 
-- `DATA_ROOT` default or use `export DATA_ROOT=/path/to/data`
-- Train/test years and `SUMMER_MONTHS`
-- `MAX_SAMPLES_PER_TIME`, `N_ESTIMATORS`, `RANDOM_STATE`
-- Optional overrides (not required): `SHAP_PLOT_SAMPLES` and model/data output paths.
-
-## Assets
-
-- **`assets/hunan.geojson`** — Province boundary for map clipping and masks.
-- **`assets/fonts/`** (optional) — Drop `.ttf`/`.otf` here if you want custom sans-serif fonts for figures.
+- The coherence–efficiency rule (**efficiency = 84.30 × Moran's I − 28.98**) was fitted on the four Hunan subregions only and locked at **2026-08-07T03:49:16 UTC**, before any Guangxi or Guangdong model was evaluated (enforced by code order in `xreg_validation.py`; see `results/xreg/run_log.txt`).
+- Efficiency classes: low < 20%, medium 20–30%, high > 30%. Result: **4/5 class hits; MAE 2.6 percentage points** (Supplementary Tables S7–S8).
+- Re-running `xreg_validation.py` overwrites this file with a fresh timestamp; the archived record shipped here is the one reported in the paper.
 
 ## Outputs
 
-| Location       | Contents                                                                                                                                                                                                                                                 |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`models/`**  | `summer/rf_model_summer.joblib`, `spring/rf_model_spring.joblib`, `summer/train_test_data.npz`, seasonal NetCDF slices, and SHAP cache (`summer/shap_values_test_cache.npz`)                                                                             |
-| **`results/`** | Analysis CSV/MD (`ablation_results.csv`, `shap_by_intensity.csv`, `summer_subregions_performance_shap.csv`, `summer_central_south_r2_gap_bootstrap_ci.csv`, `shap_disorder_bootstrap.csv`, `spring_summer_shap_direction.csv`, ...), plus figure PNG/SVG |
+| Location | Contents |
+| -------- | -------- |
+| **`models/`** (not tracked) | `summer/rf_model_summer.joblib`, `summer/lr_model.joblib`, `spring/rf_model_spring.joblib`, `train_test_data.npz`, seasonal NetCDF slices, SHAP cache. Trained RF binaries reach several hundred MB and are regenerated locally via the `train` and `xreg` stages with pinned scikit-learn 1.7.2 |
+| **`results/`** (tracked) | Curated paper artifacts — see "Where each manuscript item lives" above |
 
 ## SHAP cache
 
-To avoid recomputing the same SHAP values in both analysis and figure scripts, the pipeline now uses a shared cache:
-
-- Cache file: `models/summer/shap_values_test_cache.npz`
-- Source utility: `src/core/shap_cache.py`
-- Stage behavior: `analysis` warms the cache once; downstream scripts reuse it
-
-The cache is automatically invalidated and recomputed when:
-
-- The summer model file (`RF_SUMMER_MODEL_PATH`) changes
-- The test NPZ file (`DATA_NPZ_PATH`) changes
-- Sample count or feature order no longer matches
-
-## Figures (non-exhaustive)
-
-- Scatter: raw IMERG vs CN05.1 and RF vs CN05.1
-- Spatial: observed vs RF-corrected precipitation by year
-- RMSE by rain-intensity class (IMERG / LR / RF)
-- Domain-mean daily time series
-- Permutation importance and SHAP (summary + tcwv dependence)
-- IMERG vs RF bias maps
-- Supplementary raw IMERG spatial means
+- Cache file: `models/summer/shap_values_test_cache.npz` (utility: `src/core/shap_cache.py`)
+- The `analysis` stage warms the cache once; downstream figure scripts reuse it
+- Automatically invalidated when the summer model, test NPZ, sample count, or feature order changes
 
 ## Troubleshooting
 
-- **Missing Python packages (`shap`, `matplotlib`, etc.)** — Install dependencies with `pip install -r requirements.txt` in the same environment used to run `python main.py`.
-- **`geopandas` / boundary errors** — Install geopandas and ensure `assets/hunan.geojson` exists; plotting uses the same mask philosophy as training.
-- **Empty time intersection** — Check that IMERG, CN05.1, and ERA5 share overlapping `time` after preprocessing.
-- **Excel skipped** — Install `openpyxl`; CSV tables are still written.
-- **Pipeline dependency errors** — Run full stages in order: `python main.py --steps train analysis figures`.
+- **Missing packages** — `pip install -r requirements.txt` in the same environment used for `python main.py`.
+- **`geopandas` / boundary errors** — install geopandas; ensure `assets/*.geojson` exist.
+- **Empty time intersection** — check IMERG / CN05.1 / ERA5 overlapping `time` after preprocessing.
+- **`xreg` missing GX/GD files** — confirm the `guangxi/` and `guangdong/` folders under `DATA_ROOT` (`.nc4` / `.nc` both accepted).
+- **Stage dependency errors** — run in order (`train → analysis → figures → xreg`); `main.py` checks required artifacts before each stage.
 
 ## License
 
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+MIT — see [LICENSE](LICENSE).
 
 ## Citation
 
 If you use this code in published work, please cite the accompanying paper:
 
-> Yi Xu. _Mechanism purity, not algorithmic complexity, governs machine
-> learning correction of satellite precipitation: The Terrain–Moisture–Intensity
-> (TMI) framework and a case study in Hunan Province, China._
+> Yi Xu. _Machine learning correction of satellite precipitation is governed
+> by mechanism purity, not algorithmic complexity: a proof-of-concept study
+> in Hunan, China, with pre-registered cross-regional validation._
 > (under review)
 
-Additionally, remember to cite the IMERG, CN05.1, and ERA5 products you used.
+Additionally, please cite the IMERG, CN05.1, ERA5, and SRTM products listed under "Input data".
