@@ -1,0 +1,6 @@
+region,subregion,morans_i,morans_i_se,predicted_efficiency,predicted_class,rule,registered_at_utc
+guangxi,gx_karst_nw,0.7874685723872115,0.011659840979808414,37.40398796469661,high,eff = 84.30 * I + -28.98 (fit on Hunan subregions),2026-08-09T02:39:10.665800+00:00
+guangxi,gx_se_hills,0.7729010233359404,0.010148242740392862,36.17599403413263,high,eff = 84.30 * I + -28.98 (fit on Hunan subregions),2026-08-09T02:39:10.665800+00:00
+guangdong,gd_coastal,0.6639433144999539,0.014212235018012309,26.991236552428905,medium,eff = 84.30 * I + -28.98 (fit on Hunan subregions),2026-08-09T02:39:10.665800+00:00
+guangdong,gd_inland_hills,0.7066365931959221,0.011748499107227016,30.590132079054957,high,eff = 84.30 * I + -28.98 (fit on Hunan subregions),2026-08-09T02:39:10.665800+00:00
+guangdong,gd_north_mtn,0.682848986621711,0.013274353423116815,28.584919232819434,medium,eff = 84.30 * I + -28.98 (fit on Hunan subregions),2026-08-09T02:39:10.665800+00:00

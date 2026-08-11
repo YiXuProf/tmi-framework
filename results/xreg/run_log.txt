@@ -1,0 +1,366 @@
+[2026-08-07 10:20:00] === xreg_validation start ===
+[2026-08-07 10:20:00] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-07 10:20:34] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-07 10:21:03] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-07 10:21:05] guangxi/train: built n=151340, days=460 -> cached guangxi_train.npz
+[2026-08-07 10:21:05] guangxi/test: built n=60207, days=183 -> cached guangxi_test.npz
+[2026-08-07 11:02:07] === xreg_validation start ===
+[2026-08-07 11:02:07] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-07 11:02:40] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-07 11:03:04] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-07 11:03:04] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-07 11:06:41] === xreg_validation start ===
+[2026-08-07 11:06:41] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-07 11:06:51] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-07 11:07:02] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-07 11:07:02] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-07 11:07:02] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-07 11:09:04] guangxi: RF trained n=151340 in 122s
+[2026-08-07 11:09:04] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-07 11:09:24] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-07 11:09:26] guangdong/train: built n=111051, days=457 -> cached guangdong_train.npz
+[2026-08-07 11:09:26] guangdong/test: built n=44469, days=183 -> cached guangdong_test.npz
+[2026-08-07 11:10:53] guangdong: RF trained n=111051 in 87s
+[2026-08-07 11:10:53] hunan boundary: /mnt/workspace/assets/hunan.geojson
+[2026-08-07 11:10:58] proxies.csv written (9 subregions)
+[2026-08-07 11:10:58] WARNING self-check: hunan/west Moran's I=0.712 vs Table S5 0.620 (|diff|>0.01)
+[2026-08-07 11:10:58] WARNING self-check: hunan/north Moran's I=0.718 vs Table S5 0.632 (|diff|>0.01)
+[2026-08-07 11:10:58] WARNING self-check: hunan/south Moran's I=0.656 vs Table S5 0.555 (|diff|>0.01)
+[2026-08-07 11:10:58] WARNING self-check: hunan/central Moran's I=0.579 vs Table S5 0.501 (|diff|>0.01)
+[2026-08-07 11:10:58] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-07 11:10:58] PRE-REGISTRATION locked (2026-08-07T03:10:58.364376+00:00): rule eff=83.65*I+-31.00; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-07 11:11:02] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-07 11:11:02] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-07 11:11:14] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-07 11:11:14] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-07 11:11:23] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-07 11:11:23] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-07 11:11:33] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-07 11:11:33] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-07 11:11:37] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-07 11:11:37] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-07 11:11:46] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-07 11:11:46] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-07 11:11:50] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-07 11:11:50] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-07 11:11:54] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-07 11:11:54] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-07 11:11:58] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-07 11:11:58] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-07 11:12:04] eval_matrix.csv written (32 rows)
+[2026-08-07 11:12:04] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-07 11:12:04] prediction_check.csv written; class hits: 3/5
+[2026-08-07 11:12:06] figures written: fig1/fig2/fig3
+[2026-08-07 11:12:06] === done in 5.4 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-07 11:46:56] === xreg_validation start ===
+[2026-08-07 11:46:56] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-07 11:47:30] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-07 11:47:53] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-07 11:47:54] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-07 11:47:54] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-07 11:48:29] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-07 11:48:50] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-07 11:48:50] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-07 11:48:50] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-07 11:49:16] hunan mask from dem_reference.nc: 321 cells
+[2026-08-07 11:49:16] proxies.csv written (9 subregions)
+[2026-08-07 11:49:16] WARNING self-check: hunan/west Moran's I=0.689 vs Table S5 0.620 (|diff|>0.01)
+[2026-08-07 11:49:16] WARNING self-check: hunan/north Moran's I=0.686 vs Table S5 0.632 (|diff|>0.01)
+[2026-08-07 11:49:16] WARNING self-check: hunan/south Moran's I=0.620 vs Table S5 0.555 (|diff|>0.01)
+[2026-08-07 11:49:16] WARNING self-check: hunan/central Moran's I=0.555 vs Table S5 0.501 (|diff|>0.01)
+[2026-08-07 11:49:16] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-07 11:49:16] PRE-REGISTRATION locked (2026-08-07T03:49:16.577413+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-07 11:49:20] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-07 11:49:20] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-07 11:49:32] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-07 11:49:32] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-07 11:49:40] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-07 11:49:40] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-07 11:49:50] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-07 11:49:50] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-07 11:49:54] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-07 11:49:54] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-07 11:50:02] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-07 11:50:02] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-07 11:50:06] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-07 11:50:06] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-07 11:50:10] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-07 11:50:10] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-07 11:50:13] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-07 11:50:13] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-07 11:50:19] eval_matrix.csv written (32 rows)
+[2026-08-07 11:50:19] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-07 11:50:19] prediction_check.csv written; class hits: 4/5
+[2026-08-07 11:50:21] figures written: fig1/fig2/fig3
+[2026-08-07 11:50:21] === done in 3.4 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-07 12:40:47] === xreg_validation start ===
+[2026-08-07 12:40:47] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-07 12:41:21] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-07 12:41:53] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-07 12:41:53] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-07 12:41:53] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-07 12:42:28] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-07 12:42:52] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-07 12:42:52] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-07 12:42:52] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-07 12:43:18] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-07 12:43:18] proxies.csv written (9 subregions)
+[2026-08-07 12:43:18] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-07 12:43:18] PRE-REGISTRATION locked (2026-08-07T04:43:18.448027+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-07 12:43:22] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-07 12:43:22] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-07 12:43:34] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-07 12:43:34] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-07 12:43:42] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-07 12:43:42] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-07 12:43:51] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-07 12:43:51] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-07 12:43:55] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-07 12:43:55] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-07 12:44:04] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-07 12:44:04] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-07 12:44:08] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-07 12:44:08] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-07 12:44:11] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-07 12:44:11] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-07 12:44:15] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-07 12:44:15] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-07 12:44:20] eval_matrix.csv written (32 rows)
+[2026-08-07 12:44:20] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-07 12:44:20] prediction_check.csv written; class hits: 4/5
+[2026-08-07 12:44:22] figures written: fig1/fig2/fig3
+[2026-08-07 12:44:22] === done in 3.6 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-07 14:04:05] === xreg_validation start ===
+[2026-08-07 14:04:05] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-07 14:04:38] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-07 14:05:03] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-07 14:05:03] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-07 14:05:03] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-07 14:05:38] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-07 14:06:01] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-07 14:06:01] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-07 14:06:01] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-07 14:06:27] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-07 14:06:27] proxies.csv written (9 subregions)
+[2026-08-07 14:06:27] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-07 14:06:27] PRE-REGISTRATION locked (2026-08-07T06:06:27.474283+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-07 14:06:31] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-07 14:06:31] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-07 14:06:42] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-07 14:06:42] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-07 14:06:51] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-07 14:06:51] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-07 14:07:00] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-07 14:07:00] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-07 14:07:04] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-07 14:07:04] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-07 14:07:13] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-07 14:07:13] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-07 14:07:17] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-07 14:07:17] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-07 14:07:20] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-07 14:07:20] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-07 14:07:24] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-07 14:07:24] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-07 14:07:29] eval_matrix.csv written (32 rows)
+[2026-08-07 14:07:29] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-07 14:07:29] prediction_check.csv written; class hits: 4/5
+[2026-08-07 14:07:29] fig1: locked rule drawn from predictions_registered.csv (eff = 84.30 * I + -28.98 (fit on Hunan subregions))
+[2026-08-07 14:07:30] fig3 guangxi Moran's I: gx_karst_nw=0.787, gx_se_hills=0.773
+[2026-08-07 14:07:31] figures written: fig1/fig2/fig3
+[2026-08-07 14:07:31] === done in 3.4 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-09 09:37:47] === xreg_validation start ===
+[2026-08-09 09:37:47] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-09 09:38:21] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-09 09:38:44] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-09 09:38:44] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-09 09:38:44] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-09 09:39:19] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-09 09:39:42] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-09 09:39:42] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-09 09:39:42] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-09 09:40:08] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-09 09:40:08] proxies.csv written (9 subregions)
+[2026-08-09 09:40:08] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-09 09:40:08] PRE-REGISTRATION locked (2026-08-09T01:40:08.611103+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-09 09:40:14] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-09 09:40:14] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-09 09:40:28] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-09 09:40:28] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-09 09:40:38] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-09 09:40:38] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-09 09:40:50] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-09 09:40:50] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-09 09:40:56] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-09 09:40:56] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-09 09:41:07] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-09 09:41:07] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-09 09:41:12] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-09 09:41:12] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-09 09:41:17] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-09 09:41:17] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-09 09:41:21] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-09 09:41:21] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-09 09:41:28] eval_matrix.csv written (32 rows)
+[2026-08-09 09:41:28] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-09 09:41:28] prediction_check.csv written; class hits: 4/5
+[2026-08-09 09:41:28] fig1: locked rule drawn from predictions_registered.csv (eff = 84.30 * I + -28.98 (fit on Hunan subregions))
+[2026-08-09 09:41:29] fig3 guangxi Moran's I: gx_karst_nw=0.787, gx_se_hills=0.773
+[2026-08-09 09:41:30] figures written: fig1/fig2/fig3
+[2026-08-09 09:41:30] === done in 3.7 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-09 09:51:00] === xreg_validation start ===
+[2026-08-09 09:51:00] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-09 09:51:34] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-09 09:51:55] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-09 09:51:55] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-09 09:51:55] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-09 09:52:30] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-09 09:52:51] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-09 09:52:51] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-09 09:52:51] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-09 09:53:17] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-09 09:53:17] proxies.csv written (9 subregions)
+[2026-08-09 09:53:17] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-09 09:53:17] PRE-REGISTRATION locked (2026-08-09T01:53:17.391288+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-09 09:53:22] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-09 09:53:22] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-09 09:53:36] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-09 09:53:36] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-09 09:53:47] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-09 09:53:47] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-09 09:53:58] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-09 09:53:58] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-09 09:54:04] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-09 09:54:04] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-09 09:54:15] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-09 09:54:15] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-09 09:54:19] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-09 09:54:19] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-09 09:54:24] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-09 09:54:24] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-09 09:54:29] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-09 09:54:29] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-09 09:54:35] eval_matrix.csv written (32 rows)
+[2026-08-09 09:54:35] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-09 09:54:35] prediction_check.csv written; class hits: 4/5
+[2026-08-09 09:54:35] fig1: locked rule drawn from predictions_registered.csv (eff = 84.30 * I + -28.98 (fit on Hunan subregions))
+[2026-08-09 09:54:36] fig3 guangxi Moran's I: gx_karst_nw=0.787, gx_se_hills=0.773
+[2026-08-09 09:54:38] figures written: fig1/fig2/fig3
+[2026-08-09 09:54:38] === done in 3.6 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-09 10:05:28] === xreg_validation start ===
+[2026-08-09 10:05:28] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-09 10:06:02] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-09 10:06:25] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-09 10:06:25] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-09 10:06:25] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-09 10:07:00] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-09 10:07:22] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-09 10:07:22] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-09 10:07:22] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-09 10:07:48] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-09 10:07:48] proxies.csv written (9 subregions)
+[2026-08-09 10:07:48] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-09 10:07:48] PRE-REGISTRATION locked (2026-08-09T02:07:48.370538+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-09 10:07:53] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-09 10:07:53] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-09 10:08:07] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-09 10:08:07] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-09 10:08:17] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-09 10:08:17] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-09 10:08:29] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-09 10:08:29] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-09 10:08:34] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-09 10:08:34] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-09 10:08:45] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-09 10:08:45] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-09 10:08:50] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-09 10:08:50] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-09 10:08:55] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-09 10:08:55] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-09 10:08:59] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-09 10:08:59] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-09 10:09:05] eval_matrix.csv written (32 rows)
+[2026-08-09 10:09:05] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-09 10:09:05] prediction_check.csv written; class hits: 4/5
+[2026-08-09 10:09:05] fig1: locked rule drawn from predictions_registered.csv (eff = 84.30 * I + -28.98 (fit on Hunan subregions))
+[2026-08-09 10:09:07] fig3 guangxi Moran's I: gx_karst_nw=0.787, gx_se_hills=0.773
+[2026-08-09 10:09:09] figures written: fig1/fig2/fig3
+[2026-08-09 10:09:09] === done in 3.7 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-09 10:16:12] === xreg_validation start ===
+[2026-08-09 10:16:12] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-09 10:16:45] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-09 10:17:05] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-09 10:17:05] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-09 10:17:05] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-09 10:17:41] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-09 10:17:58] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-09 10:17:59] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-09 10:17:59] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-09 10:18:24] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-09 10:18:24] proxies.csv written (9 subregions)
+[2026-08-09 10:18:24] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-09 10:18:24] PRE-REGISTRATION locked (2026-08-09T02:18:24.601510+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-09 10:18:30] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-09 10:18:30] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-09 10:18:43] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-09 10:18:43] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-09 10:18:54] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-09 10:18:54] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-09 10:19:06] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-09 10:19:06] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-09 10:19:11] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-09 10:19:11] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-09 10:19:22] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-09 10:19:22] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-09 10:19:27] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-09 10:19:27] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-09 10:19:32] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-09 10:19:32] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-09 10:19:36] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-09 10:19:36] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-09 10:19:43] eval_matrix.csv written (32 rows)
+[2026-08-09 10:19:43] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-09 10:19:43] prediction_check.csv written; class hits: 4/5
+[2026-08-09 10:19:43] fig1: locked rule drawn from predictions_registered.csv (eff = 84.30 * I + -28.98 (fit on Hunan subregions))
+[2026-08-09 10:19:44] fig3 guangxi Moran's I: gx_karst_nw=0.787, gx_se_hills=0.773
+[2026-08-09 10:19:46] figures written: fig1/fig2/fig3
+[2026-08-09 10:19:46] === done in 3.6 min; outputs in /mnt/workspace/results/xreg ===
+[2026-08-09 10:37:00] === xreg_validation start ===
+[2026-08-09 10:37:00] hunan: NPZ test n=59064; RF/LR loaded (read-only)
+[2026-08-09 10:37:34] guangxi: using imerg=imerg_guangxi.nc4, era5=era5_guangxi.nc, dem=dem_guangxi_025.nc, boundary=/mnt/workspace/assets/guangxi.geojson
+[2026-08-09 10:37:51] guangxi: grid lat=23 lon=31, cells_in_boundary=334, days=643 (2016-06-01..2022-08-31)
+[2026-08-09 10:37:51] guangxi/train: loaded cache (guangxi_train.npz), n=151340
+[2026-08-09 10:37:51] guangxi/test: loaded cache (guangxi_test.npz), n=60207
+[2026-08-09 10:38:26] guangdong: using imerg=imerg_guangdong.nc4, era5=era5_guangdong.nc, dem=dem_guangdong_025.nc, boundary=/mnt/workspace/assets/guangdong.geojson
+[2026-08-09 10:38:45] guangdong: grid lat=24 lon=31, cells_in_boundary=256, days=640 (2016-06-04..2022-08-31)
+[2026-08-09 10:38:45] guangdong/train: loaded cache (guangdong_train.npz), n=111051
+[2026-08-09 10:38:45] guangdong/test: loaded cache (guangdong_test.npz), n=44469
+[2026-08-09 10:39:10] hunan mask: dem_reference:/mnt/workspace/models/summer/dem_reference.nc; cells=321
+[2026-08-09 10:39:10] proxies.csv written (9 subregions)
+[2026-08-09 10:39:10] hunan subregion efficiencies (NPZ): central=16.2%, north=26.2%, south=26.6%, west=30.1%
+[2026-08-09 10:39:10] PRE-REGISTRATION locked (2026-08-09T02:39:10.665800+00:00): rule eff=84.30*I+-28.98; predictions written for 5 GX/GD subregions BEFORE evaluation
+[2026-08-09 10:39:15] eval hunan->hunan [rf] R2=0.344 eff=26.5%
+[2026-08-09 10:39:15] eval hunan->hunan [lr] R2=0.344 eff=26.5%
+[2026-08-09 10:39:30] eval hunan->guangxi [rf] R2=0.257 eff=28.2%
+[2026-08-09 10:39:30] eval hunan->guangxi [lr] R2=0.364 eff=33.6%
+[2026-08-09 10:39:41] eval hunan->guangdong [rf] R2=0.431 eff=16.9%
+[2026-08-09 10:39:41] eval hunan->guangdong [lr] R2=0.490 eff=21.4%
+[2026-08-09 10:39:52] eval guangxi->hunan [rf] R2=0.295 eff=23.8%
+[2026-08-09 10:39:52] eval guangxi->hunan [lr] R2=0.252 eff=21.5%
+[2026-08-09 10:39:58] eval guangxi->guangxi [rf] R2=0.418 eff=36.5%
+[2026-08-09 10:39:58] eval guangxi->guangxi [lr] R2=0.355 eff=33.1%
+[2026-08-09 10:40:09] eval guangxi->guangdong [rf] R2=0.459 eff=19.0%
+[2026-08-09 10:40:09] eval guangxi->guangdong [lr] R2=0.475 eff=20.2%
+[2026-08-09 10:40:14] eval guangdong->hunan [rf] R2=0.238 eff=20.8%
+[2026-08-09 10:40:14] eval guangdong->hunan [lr] R2=0.221 eff=19.9%
+[2026-08-09 10:40:19] eval guangdong->guangxi [rf] R2=0.227 eff=26.8%
+[2026-08-09 10:40:19] eval guangdong->guangxi [lr] R2=0.282 eff=29.5%
+[2026-08-09 10:40:23] eval guangdong->guangdong [rf] R2=0.537 eff=25.0%
+[2026-08-09 10:40:23] eval guangdong->guangdong [lr] R2=0.539 eff=25.2%
+[2026-08-09 10:40:30] eval_matrix.csv written (32 rows)
+[2026-08-09 10:40:30] tables written: table_loro_matrix.csv, table_loro_deltaR2.csv, table_subregion_summary.csv
+[2026-08-09 10:40:30] prediction_check.csv written; class hits: 4/5
+[2026-08-09 10:40:30] fig1: locked rule drawn from predictions_registered.csv (eff = 84.30 * I + -28.98 (fit on Hunan subregions))
+[2026-08-09 10:40:31] fig3 guangxi Moran's I: gx_karst_nw=0.787, gx_se_hills=0.773
+[2026-08-09 10:40:33] figures written: Fig.7 / Fig.8 / Fig.S2 (fig7_coherence_vs_efficiency, fig8_two_arm_bars, figS2_morans_map)
+[2026-08-09 10:40:33] === done in 3.6 min; outputs in /mnt/workspace/results/xreg ===
